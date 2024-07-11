@@ -22,28 +22,35 @@ button_b = Button(plasma2040.BUTTON_B)
 
 led_strip.start()
 
-# Define the colors
-#randset = (0, 0, 0, 0)
-#colours = [(255, 0, 0, 0), (0, 255, 0, 0), (0, 0, 255, 0), (0, 0, 0, 255), randset]
-
 # Initialize the color index
-current_color_index = -1
+current_color_index = 0
 
 for i in range(NUM_LEDS):
-    led_strip.set_rgb(i, 0, 0, 0, 0)
+    led_strip.set_rgb(i, int(255/2), 0, 0, 0)
 
 while True:
     if user_sw.read():
         print("Pressed User SW - {}".format(time.ticks_ms()))
         # Cycle to the next color
-        randset = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255), 0)
-        colours = [(255, 0, 0, 0), (0, 255, 0, 0), (0, 0, 255, 0), (0, 0, 0, 255), randset]
-        current_color_index = (current_color_index + 1) % len(colours)
-        r, g, b, w = colours[current_color_index]
-        for i in range(NUM_LEDS):
-            led_strip.set_rgb(i, r, g, b, w)
-        print(f"Color changed to RGBW: {r}, {g}, {b}, {w}")
-        time.sleep(0.5)  # Add a delay to avoid rapid color changes        
+        randsolo = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255), 0)
+        LEDcolours = [(255, 0, 0, 0), (0, 255, 0, 0), (0, 0, 255, 0), (0, 0, 0, 255), randsolo, "LEDrandind", "LEDrain"]
+        current_color_index = (current_color_index + 1) % len(LEDcolours)
+        print(LEDcolours[current_color_index])
+        if LEDcolours[current_color_index] == "LEDrandind":
+            for i in range(NUM_LEDS):
+                led_strip.set_rgb(i, random.randint(0, 255), random.randint(0, 255), random.randint(0, 255), 0)
+            time.sleep(0.5)  # Add a delay to avoid rapid color changes
+        elif LEDcolours[current_color_index] == "LEDrain":
+            for i in range(NUM_LEDS):
+                hue = float(i) / NUM_LEDS
+                led_strip.set_hsv(i, hue, 1.0, 1.0)
+            time.sleep(0.5)  # Add a delay to avoid rapid color changes
+        else:
+            r, g, b, w = LEDcolours[current_color_index]
+            for i in range(NUM_LEDS):
+                led_strip.set_rgb(i, r, g, b, w)
+            print(f"Color changed to RGBW: {r}, {g}, {b}, {w}")
+            time.sleep(0.5)  # Add a delay to avoid rapid color changes        
 
     if button_a.read():
         bright = bright+.1
