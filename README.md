@@ -5,7 +5,8 @@ Button activity:
 
 Button "user_sw"
 
-Rotate through colours - Red, Green, Blue, White, Random colour, each LED random, Rainbow.
+~~Rotate through colours - Red, Green, Blue, White, Random colour, each LED random, Rainbow.~~
+Working for now, may have to revist outputs to get those below to work.
 
 Button "button_a"
 
