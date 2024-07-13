@@ -10,7 +10,7 @@ Working for now, may have to revist outputs to get those below to work.
 
 Button "button_a"
 
-Alters brightness of lights - start at 50%, drop to 25%, 10%, then up to 100% and down to 75%
+Alters brightness of lights - start at 50%, drop to 25%, then up to 100% and down to 75% and repeat.
 
 Button "button_b"
 
